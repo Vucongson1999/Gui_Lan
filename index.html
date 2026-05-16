@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Em...</title>
+    <title>Gửi người anh thương...</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@500;700&display=swap');
 
@@ -12,22 +12,25 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html {
+            scroll-behavior: smooth; /* Kích hoạt hiệu ứng cuộn trang mượt mà */
+        }
+
         body {
             background: #fcf1ee;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start; /* GIẢI PHÁP: Chuyển sang flex-start giúp căn đỉnh chuẩn khi nội dung dài và cuộn dọc */
+            align-items: flex-start; 
             min-height: 100vh;
             font-family: 'Quicksand', sans-serif;
-            /* GIẢI PHÁP CUỘN MƯỢT MÀ: Bỏ overflow:hidden, cho phép cuộn dọc tự nhiên trên mobile */
             overflow-y: auto; 
             overflow-x: hidden; 
-            -webkit-overflow-scrolling: touch; /* Hiệu ứng cuộn mượt cho iOS */
+            -webkit-overflow-scrolling: touch; 
         }
 
-        /* Khung hiệu ứng nền - Luôn cố định tại màn hình kể cả khi cuộn trang */
+        /* Khung hiệu ứng nền cố định */
         #effect-container {
             position: fixed;
             top: 0; left: 0;
@@ -36,7 +39,7 @@
             z-index: 1;
         }
 
-        /* Hạt mưa ban đầu rơi chậm và lãng mạn */
+        /* Hạt mưa ban đầu rơi chậm rãi */
         .drop {
             position: absolute;
             background: linear-gradient(transparent, #df846c);
@@ -66,7 +69,7 @@
             100% { transform: translateY(110vh) rotate(360deg) scale(0.6); opacity: 0; }
         }
 
-        /* Container chính tự động giãn chiều cao theo nội dung bức thư */
+        /* Container chính co giãn */
         .box-container {
             position: relative;
             display: flex;
@@ -74,9 +77,9 @@
             align-items: center;
             width: 100%;
             max-width: 480px;
-            padding: 40px 16px; /* Tăng khoảng đệm trên/dưới an toàn khi cuộn trang */
+            padding: 40px 16px; 
             z-index: 5;
-            min-height: 100vh; /* Đảm bảo căn giữa phong bì lúc ban đầu */
+            min-height: 100vh; 
         }
 
         /* PHONG BÌ 3D */
@@ -91,7 +94,7 @@
             cursor: pointer;
             z-index: 10;
             transition: opacity 0.5s ease, transform 0.5s ease;
-            margin: auto 0; /* Giữ phong bì ở giữa màn hình khi chưa mở */
+            margin: auto 0; 
         }
 
         .envelope-flap {
@@ -132,7 +135,7 @@
 
         .envelope-wrapper.open-flap .envelope-flap { transform: rotateX(180deg); z-index: 1; }
 
-        /* LÁ THƯ GỐC - KHẮC PHỤC LỖI TRÀN CHỮ VÀ MẤT CHỮ */
+        /* LÁ THƯ */
         .letter-paper {
             width: 100%;
             position: relative;
@@ -145,7 +148,7 @@
             border: 3px double #f4dcd6;
             box-shadow: 0 12px 40px rgba(74, 59, 50, 0.1);
             z-index: 20;
-            max-width: 100%; /* Đảm bảo không phình to quá màn hình mobile */
+            max-width: 100%;
             overflow: hidden;
         }
 
@@ -162,10 +165,10 @@
         }
 
         .paper-body {
-            padding: 30px 24px; /* GIẢI PHÁP: Tăng lề bên trong để chữ không chạm sát rìa màn hình */
+            padding: 30px 24px; 
             background-image: linear-gradient(to bottom, transparent 27px, #ebdcd3 27px, #ebdcd3 28px, transparent 28px);
             background-size: 100% 28px;
-            line-height: 28px; /* Khớp đồng bộ tuyệt đối với khoảng cách dòng kẻ giấy */
+            line-height: 28px;
         }
 
         #content { 
@@ -174,13 +177,13 @@
             font-weight: 700; 
             color: #4a3b32; 
             white-space: pre-wrap; 
-            word-break: break-word; /* GIẢI PHÁP: Ép ngắt từ thông minh khi chạm biên phải mobile */
+            word-break: break-word; 
             overflow-wrap: break-word;
         }
         .cursor { display: inline-block; width: 2px; height: 1.1em; background-color: #df846c; animation: blink 0.7s infinite; vertical-align: middle; }
         @keyframes blink { 50% { opacity: 0; } }
 
-        /* LAYOUT 2: THIẾT KẾ DỄ THƯƠNG KHÔNG NÚT BẤM */
+        /* LAYOUT 2 */
         .final-layout {
             width: 100%;
             display: none;
@@ -200,7 +203,7 @@
 
         .final-layout.show { display: block; opacity: 1; transform: scale(1) translateY(0); }
 
-        /* GALLERY 2 ẢNH XẾP LỚP DỄ THƯƠNG TRÊN MOBILE */
+        /* GALLERY 2 ẢNH */
         .memory-gallery {
             display: flex;
             justify-content: center;
@@ -217,10 +220,8 @@
             transition: transform 0.4s ease;
         }
 
-        /* Tạo độ nghiêng đáng yêu cho hai bức ảnh hướng vào nhau */
         .photo-card:nth-child(1) { transform: rotate(-6deg); }
         .photo-card:nth-child(2) { transform: rotate(6deg); }
-        .photo-card:hover { transform: scale(1.08) rotate(0deg); z-index: 10; }
 
         .main-photo {
             width: 100%;
@@ -233,7 +234,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.06);
         }
 
-        /* HIỆU ỨNG BÓNG MỜ ĐỔ RA TỪ CHÍNH ẢNH */
         .photo-card::after {
             content: '';
             position: absolute;
@@ -248,7 +248,6 @@
             z-index: 1;
         }
 
-        /* Khung chữ bày tỏ chân thành bên dưới ảnh */
         .proposal-text {
             color: #4a3b32;
             font-size: 0.95rem;
@@ -265,7 +264,6 @@
             font-weight: 700;
         }
 
-        /* ĐÁP ỨNG MÀN HÌNH SIÊU NHỎ */
         @media (max-width: 360px) {
             .paper-body { padding: 25px 15px; }
             #content { font-size: 17px; line-height: 25px; }
@@ -281,7 +279,7 @@
 <body>
 
     <audio id="bg-music" loop>
-        <source src="https://files.catbox.moe/2qe0nt.mp3" type="audio/mpeg">
+        <source src="https://files.catbox.moe/u0q2v5.mp3" type="audio/mpeg">
     </audio>
 
     <div id="effect-container"></div>
@@ -290,41 +288,41 @@
         <div class="envelope-wrapper" id="envelope" onclick="openEnvelope()">
             <div class="envelope-flap"></div>
             <div class="envelope-front"></div>
-            <div class="hint">Chạm vào phong thư để mở em nhé 💌</div>
+            <div class="hint">Chạm vào phong bì để mở thư anh gửi em nhé 💌</div>
         </div>
 
         <div class="letter-paper" id="paper">
             <div class="paper-body">
                 <div id="content"></div><span class="cursor" id="cursor"></span>
-                <p style="text-align: right; font-family: 'Dancing Script'; font-size: 20px; color: #c96f58; margin: 15px 0 0 0;"></p>
+                <p style="text-align: right; font-family: 'Dancing Script'; font-size: 20px; color: #c96f58; margin: 15px 0 0 0;">Anh xin lỗi em nhiều nhé! 🌸</p>
             </div>
         </div>
 
         <div class="final-layout" id="final-layout">
             <div class="memory-gallery">
                 
-                <div class="photo-card" style="--bg-img: url('https://hinhanhonline.com/Hinhanh/images08/AnhAL/hinh-nen-dien-thoai-174.jpg');">
-                    <img src="https://hinhanhonline.com/Hinhanh/images08/AnhAL/hinh-nen-dien-thoai-174.jpg" class="main-photo" alt="Ảnh chàng trai đợi">
+                <div class="photo-card" style="--bg-img: url('https://picsum.photos/300/350?random=1');">
+                    <img src="https://picsum.photos/300/350?random=1" class="main-photo" alt="Ảnh chàng trai đợi">
                 </div>
                 
-                <div class="photo-card" style="--bg-img: url('https://thuthuatnhanh.com/wp-content/uploads/2019/10/nhung-hinh-anh-dep-ve-tinh-yeu-doi-lua-lang-man-ben-nhau.jpg');">
-                    <img src="https://thuthuatnhanh.com/wp-content/uploads/2019/10/nhung-hinh-anh-dep-ve-tinh-yeu-doi-lua-lang-man-ben-nhau.jpg" class="main-photo" alt="Ảnh cô gái">
+                <div class="photo-card" style="--bg-img: url('https://picsum.photos/300/350?random=2');">
+                    <img src="https://picsum.photos/300/350?random=2" class="main-photo" alt="Ảnh cô gái">
                 </div>
                 
             </div>
             
             <div class="proposal-text">
-               Hãy cho nhau một cơ hội để mình tìm hiểu nhau e nhé.
-                <span>Anh vẫn sẽ luôn ở đây, kiên nhẫn chờ đợi một cơ hội để được tiếp tục quan tâm, che chở và chinh phục trái tim em. 🌱❤️</span>
+                Mọi lỗi lầm anh đều xin nhận hết, chỉ mong em đừng im lặng...
+                <span>Anh vẫn sẽ luôn ở đây, kiên nhẫn chờ đợi một cơ hội để được tiếp tục quan tâm, che chở và chinh phục trái tim em lại từ đầu. 🌱❤️</span>
             </div>
         </div>
     </div>
 
     <script>
-        const text = "Lan à,\n\nĐã 1 tuần trôi qua, trong suốt 1 tuần vừa rồi không được trò chuyện cùng em, anh thấy thật trống trải, anh tự vấn với bản thân rằng mình đã làm gì có lỗi với em? Câu hỏi tưởng chừng rất dễ mà anh vẫn chưa tìm được câu trả lời.\n\n Anh xuất phát là dân kỹ thuật, nên tính cách và con người anh có hơi khô khan, cách nói chuyện của anh có thể chưa đủ làm em tin tưởng để có thể kể cho anh nghe về mọi thứ diễn ra xung quanh em. Anh thừa nhận cách nói chuyện của mình còn nhiều khuyết điểm, chưa chạm được đến trái tim em. \n\nHôm trước khi đọc được story em chia sẻ, anh nghĩ em đang stress trong công việc, lúc đó anh chỉ ước rằng có thể ở bên và cùng em vượt qua những khó khăn của cuốc sống, nhưng thật khó vì em chưa cho anh cơ hội được làm điều đó. \n\n";
+        const text = "Chào em,\n\nMấy ngày qua, sự im lặng giữa chúng mình khiến trái tim anh nặng trĩu. Anh biết mình đã sai khi để những cảm xúc nhất thời làm tổn thương em – người mà anh trân trọng nhất. Thiếu đi tiếng cười và những tin nhắn từ em, thế giới của anh như mất đi một mảng màu rực rỡ.\n\nAnh thực sự hối lỗi và ước mình có thể quay ngược thời gian để hành xử thấu đáo hơn. Cho anh xin lỗi nhé? Anh không hứa sẽ trở nên hoàn hảo ngay lập tức, nhưng anh hứa sẽ học cách lắng nghe và bao dung hơn để không bao giờ làm em phải buồn phiền thêm nữa.\n\nTha lỗi cho anh nha, anh nhớ em rất nhiều! ❤️";
         
         let index = 0;
-        let speed = 40; 
+        let speed = 20; 
         let isOpened = false;
         let rainInterval, cuteIconInterval;
         let cuteIcons = ['❤️', '💖', '💕', '💝'];
@@ -353,6 +351,14 @@
             if (index < text.length) {
                 document.getElementById("content").innerHTML += text.charAt(index);
                 index++;
+                
+                /* ĐOẠN CODE TỰ ĐỘNG CUỘN TRANG */
+                // Luôn cuộn màn hình xuống vị trí cuối cùng của trang theo dòng chữ mới gõ
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+
                 setTimeout(typeWriter, speed);
             } else {
                 document.getElementById('cursor').style.display = 'none';
@@ -371,9 +377,12 @@
                 final.style.display = 'block';
                 setTimeout(() => final.classList.add('show'), 50);
 
+                // Cuộn mượt lên đầu trang khi giao diện ảnh dễ thương xuất hiện
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
                 clearInterval(rainInterval);
                 document.querySelectorAll('.drop').forEach(el => el.remove());
-                cuteIconInterval = setInterval(createCuteIcon, 150); 
+                cuteIconInterval = setInterval(createCuteIcon, 150);
             }, 700);
         }
 
@@ -382,7 +391,6 @@
             const drop = document.createElement('div');
             drop.classList.add('drop');
             drop.style.left = Math.random() * 100 + 'vw';
-            // Đã tối ưu: Hiệu ứng mưa rơi thong thả, chậm rãi hơn rất nhiều từ 1.5s đến 2.3s
             drop.style.animationDuration = (Math.random() * 0.8 + 1.5) + 's';
             container.appendChild(drop);
             setTimeout(() => drop.remove(), 2300);
